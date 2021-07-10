@@ -1,6 +1,6 @@
 ﻿namespace WebApiBaseLibrary.Authorization.Constants
 {
-    public static class Policies
+    public static class AuthorizationPolicies
     {
         public const string RequireAdministratorRole = "RequireAdministratorRolePolicy";
     }
