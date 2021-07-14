@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 using WebApiBaseLibrary.Authorization.Configurators;
 using WebApiBaseLibrary.Authorization.Constants;
 using WebApiBaseLibrary.Authorization.Models;
@@ -21,19 +22,20 @@ namespace WebApiBaseLibrary.Authorization.Extensions
             return services.AddSingleton(_ => jwtConfiguration);
         }
 
-        public static AuthenticationBuilder AddConfiguredJwtBearer(
+        public static void AddConfiguredJwtBearer(
             this IServiceCollection services,
-            IServiceProvider serviceProvider)
-            => services.AddAuthentication(options =>
+            Func<TokenValidationParameters> getValidationParameters)
+        {
+            services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             }).AddJwtBearer(options =>
             {
-                var jwtConfigurator = serviceProvider.GetService<IJwtConfigurator>();
-
                 options.RequireHttpsMetadata = true;
-                options.TokenValidationParameters = jwtConfigurator?.ValidationParameters;
+
+                options.TokenValidationParameters = getValidationParameters();
             });
+        }
     }
 }
