@@ -6,7 +6,7 @@ using WebApiBaseLibrary.DataAccess.Entities;
 
 namespace WebApiBaseLibrary.DataAccess.Repositories
 {
-    public class EntityFrameworkBaseRepository<TEntity> : IRepository<TEntity>
+    public class EntityFrameworkBaseRepository<TEntity> : IRepository<TEntity>, IDatabaseRepository
         where TEntity : BaseEntity
     {
         private DbContext EntityContext { get; }
@@ -66,5 +66,12 @@ namespace WebApiBaseLibrary.DataAccess.Repositories
         public bool ExistsWithId(Guid id) => EntityDbSet.Any(entity => entity.Id == id);
 
         public Task<bool> ExistsWithIdAsync(Guid id) => EntityDbSet.AnyAsync(entity => entity.Id == id);
+
+        public void SaveChanges()
+        {
+            EntityContext.SaveChanges();
+        }
+
+        public Task SaveChangesAsync() => EntityContext.SaveChangesAsync();
     }
 }
