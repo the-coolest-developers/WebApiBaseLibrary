@@ -3,5 +3,6 @@
     public class Appsettings
     {
         public const string JwtConfiguration = "JwtConfiguration";
+        public const string HashConfiguration = "HashConfiguration";
     }
 }
