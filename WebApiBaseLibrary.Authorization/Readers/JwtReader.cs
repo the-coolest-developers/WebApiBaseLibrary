@@ -7,7 +7,7 @@ namespace WebApiBaseLibrary.Authorization.Readers
 {
     public class JwtReader : IJwtReader
     {
-        public string GetUserIdFromToken(string token) => GetClaimFromToken(token, WebApiClaimTypes.UserId);
+        public string GetUserIdFromToken(string token) => GetClaimFromToken(token, WebApiClaimTypes.AccountId);
         public string GetUserRoleFromToken(string token) => GetClaimFromToken(token, ClaimTypes.Role);
 
         public string GetClaimFromToken(string token, string claimType)
