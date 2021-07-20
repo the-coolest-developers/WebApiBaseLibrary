@@ -49,7 +49,7 @@ jobs:
     parameters: # parameters are at the job level
       project_name:
         type: string
-        default: WebApiBaseLibrary
+        default: "$CIRCLE_PROJECT_REPONAME"
     environment:
       PROJECT_NAME: << parameters.project_name >>
     executor: dotnet_executor
@@ -109,7 +109,6 @@ workflows:
       - build_code:
           name: Build code
           context: Tokens
-          project_name: $CIRCLE_PROJECT_REPONAME 
           post-steps:
             - jira/notify
       
@@ -123,6 +122,5 @@ workflows:
               - develop
               - release
           context: Tokens
-          project_name: $CIRCLE_PROJECT_REPONAME
           post-steps:
             - jira/notify
