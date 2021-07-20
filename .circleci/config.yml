@@ -46,12 +46,12 @@ jobs:
       #       - output/
 
   pack_code:
-    parameters: # parameters are at the job level
-      project_name:
-        type: string
-        default: "$CIRCLE_PROJECT_REPONAME"
+    # parameters: # parameters are at the job level
+    #   project_name:
+    #     type: string
+    #     default: "$CIRCLE_PROJECT_REPONAME"
     environment:
-      PROJECT_NAME: << parameters.project_name >>
+      PROJECT_NAME: $CIRCLE_PROJECT_REPONAME
     executor: dotnet_executor
     steps:
       - checkout
