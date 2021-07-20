@@ -9,7 +9,7 @@ jobs:
     parameters: # parameters are at the job level
       project_name:
         type: string
-        default: WebApiBaseLibrary
+        default: Dummy_project
     environment:
       PROJECT_NAME: << parameters.project_name >>
     
@@ -46,12 +46,12 @@ jobs:
       #       - output/
 
   pack_code:
-    # parameters: # parameters are at the job level
-    #   project_name:
-    #     type: string
-    #     default: "$CIRCLE_PROJECT_REPONAME"
+    parameters: # parameters are at the job level
+      project_name:
+        type: string
+        default: Dummy_project
     environment:
-      PROJECT_NAME: $CIRCLE_PROJECT_REPONAME
+      PROJECT_NAME: << parameters.project_name >>
     executor: dotnet_executor
     steps:
       - checkout
@@ -109,6 +109,7 @@ workflows:
       - build_code:
           name: Build code
           context: Tokens
+          project_name: WebApiBaseLibrary
           post-steps:
             - jira/notify
       
@@ -122,5 +123,6 @@ workflows:
               - develop
               - release
           context: Tokens
+          project_name: WebApiBaseLibrary
           post-steps:
             - jira/notify
