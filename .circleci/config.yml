@@ -1,0 +1,131 @@
+# Creating executor
+executors:
+  dotnet_executor:
+    docker:
+      - image: mcr.microsoft.com/dotnet/sdk:5.0
+
+jobs:
+  build_code:
+    parameters: # parameters are at the job level
+      project_name:
+        type: string
+        default: WebApiBaseLibrary
+    environment:
+      PROJECT_NAME: << parameters.project_name >>
+    
+    executor: dotnet_executor
+    # docker:
+    #   - image: mcr.microsoft.com/dotnet/sdk:5.0
+    steps:
+      - checkout
+      - run:
+          name: Configure Nuget
+          command: |
+            set -ex
+            
+            echo "I am on branch [ $CIRCLE_BRANCH ] now"
+            echo "CIRCLE_PROJECT_REPONAME [ $CIRCLE_PROJECT_REPONAME ]"
+            echo "CIRCLE_PROJECT_USERNAME  [ $CIRCLE_PROJECT_USERNAME ]"
+            dotnet nuget add source $ARTIFACTORY_URL/nuget/tcd-nuget/ \
+            --name Artifactory \
+            --username $ARTIFACTORY_USER \
+            --password "$ARTIFACTORY_PASSWORD" \
+            --store-password-in-clear-text  
+      
+      - run:
+          working_directory: ./Source
+          name: Run Build
+          command: |
+            set -ex
+            
+            dotnet build --output /root/project/output/Build/ $PROJECT_NAME/$PROJECT_NAME.sln
+      # Persist the specified paths (workspace/echo-output) into the workspace for use in downstream job.
+      # - persist_to_workspace:
+      #     # Must be an absolute path, or relative path from working_directory. This is a directory on the container which is
+      #     # taken to be the root directory of the workspace.
+      #     root: /root/project/
+      #     # Must be relative path from root
+      #     paths:
+      #       - output/
+
+  pack_code:
+    parameters: # parameters are at the job level
+      project_name:
+        type: string
+        default: WebApiBaseLibrary
+    environment:
+      PROJECT_NAME: << parameters.project_name >>
+    executor: dotnet_executor
+    steps:
+      - checkout
+      # - attach_workspace:
+      #     # Must be absolute path or relative path from working_directory
+      #     at: /root/project/output/
+      
+      - run:
+          name: Configure Nuget
+          command: |
+            set -ex
+            
+            echo "I am on branch [ $CIRCLE_BRANCH ] now"
+            
+            dotnet nuget add source $ARTIFACTORY_URL/nuget/tcd-nuget/ \
+            --name Artifactory \
+            --username $ARTIFACTORY_USER \
+            --password "$ARTIFACTORY_PASSWORD" \
+            --store-password-in-clear-text
+
+      - run:
+          working_directory: ./Source
+          name: Pack Nuget
+          command: |
+            set -ex
+            
+            if [[ "$CIRCLE_BRANCH" == "develop" ]];
+            then
+              CPACK="Developmnet"
+            else
+              CPACK="Release"
+            fi
+            
+            dotnet pack -c $CPACK /p:Configuration=Debug /p:Platform="Any CPU" --version-suffix $CIRCLE_BRANCH -o /root/project/output/Nuget $PROJECT_NAME/$PROJECT_NAME.sln
+      
+      - run:
+          working_directory: ./output/
+          name: Push Nugets
+          command: |
+            set -ex
+            dotnet nuget add source $ARTIFACTORY_URL/nuget/tcd-nuget/$PROJECT_NAME/$CIRCLE_BRANCH \
+            --name "${PROJECT_NAME}_Artifactory" \
+            --username $ARTIFACTORY_USER \
+            --password "$ARTIFACTORY_PASSWORD" \
+            --store-password-in-clear-text   
+      
+            dotnet nuget push Nuget/ --source "${PROJECT_NAME}_Artifactory"
+            
+version: 2.1
+orbs:
+  jira: circleci/jira@1.3.1
+workflows:
+  BuildFlow:
+    jobs:
+      - build_code:
+          name: Build code
+          context: Tokens
+          project_name: WebApiBaseLibrary
+          post-steps:
+            - jira/notify
+      
+      - pack_code:
+          name: Pack and push to Artifactory
+          requires:
+            - "Build code"
+          filters:
+            branches: 
+              only:
+              - develop
+              - release
+          context: Tokens
+          project_name: WebApiBaseLibrary
+          post-steps:
+            - jira/notify
