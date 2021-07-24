@@ -1,10 +1,8 @@
 ﻿using System;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using WebApiBaseLibrary.Authorization.Configurators;
 using WebApiBaseLibrary.Authorization.Constants;
 using WebApiBaseLibrary.Authorization.Models;
 
@@ -16,7 +14,7 @@ namespace WebApiBaseLibrary.Authorization.Extensions
             this IServiceCollection services,
             IConfiguration configuration)
         {
-            var jwtConfiguration = configuration.GetSection(Appsettings.JwtConfiguration)
+            var jwtConfiguration = configuration.GetSection(AuthorizationAppsettings.JwtConfiguration)
                 .Get<JwtConfiguration>();
 
             return services.AddSingleton(_ => jwtConfiguration);

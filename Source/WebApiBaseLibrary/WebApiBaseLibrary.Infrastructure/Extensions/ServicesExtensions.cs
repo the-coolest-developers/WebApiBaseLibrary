@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using WebApiBaseLibrary.Authorization.Constants;
 using WebApiBaseLibrary.Infrastructure.Configuration;
+using WebApiBaseLibrary.Infrastructure.Constants;
 
 namespace WebApiBaseLibrary.Infrastructure.Extensions
 {
@@ -11,10 +11,10 @@ namespace WebApiBaseLibrary.Infrastructure.Extensions
             this IServiceCollection services,
             IConfiguration configuration)
         {
-            var jwtConfiguration = configuration.GetSection(Appsettings.HashConfiguration)
+            var jwtConfiguration = configuration.GetSection(InfrastructureAppSettings.HashConfiguration)
                 .Get<HashConfiguration>();
 
-            return services.AddSingleton(_ => jwtConfiguration);
+            return services.AddSingleton(jwtConfiguration);
         }
     }
 }
