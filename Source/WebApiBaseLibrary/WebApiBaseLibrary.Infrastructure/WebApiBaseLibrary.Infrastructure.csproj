@@ -2,8 +2,10 @@
 
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
+        <!-- Packaging properties -->
         <IsPackable>true</IsPackable>
-        <Version>1.0.3</Version>
+        <VersionPrefix>1.0.3</VersionPrefix>
+        <VersionSuffix>develop</VersionSuffix>
     </PropertyGroup>
 
     <ItemGroup>
