@@ -83,6 +83,7 @@ jobs:
               CPACK="Debug"
               VSUFFIX=$CIRCLE_BRANCH
             elif [[ "$CIRCLE_BRANCH" == "release" ]];
+            then
               CPACK="Release"
             fi
             
