@@ -41,12 +41,12 @@ namespace WebApiBaseLibrary.DataAccess.Repositories
             //return Task.FromResult(EntityDbSet.Update(entity));
         }
 
-        public TEntity Get(Guid id)
+        public virtual TEntity Get(Guid id)
         {
             return EntityDbSet.Find(id);
         }
 
-        public async Task<TEntity> GetAsync(Guid id)
+        public virtual async Task<TEntity> GetAsync(Guid id)
             => await EntityDbSet.FindAsync(id);
 
         public void Delete(Guid id)
