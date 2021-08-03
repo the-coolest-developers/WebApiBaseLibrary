@@ -17,12 +17,12 @@ namespace WebApiBaseLibrary.DataAccess.Repositories
             EntityContext = entityContext;
         }
 
-        public void Create(TEntity entity)
+        public virtual void Create(TEntity entity)
         {
             EntityDbSet.Add(entity);
         }
 
-        public async Task CreateAsync(TEntity entity)
+        public virtual async Task CreateAsync(TEntity entity)
         {
             await EntityDbSet.AddAsync(entity);
         }
