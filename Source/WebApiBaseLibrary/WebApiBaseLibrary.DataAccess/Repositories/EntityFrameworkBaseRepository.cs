@@ -17,23 +17,22 @@ namespace WebApiBaseLibrary.DataAccess.Repositories
             EntityContext = entityContext;
         }
 
-        public void Create(TEntity entity)
+        public virtual void Create(TEntity entity)
         {
             EntityDbSet.Add(entity);
         }
 
-        public async Task CreateAsync(TEntity entity)
+        public virtual async Task CreateAsync(TEntity entity)
         {
             await EntityDbSet.AddAsync(entity);
         }
 
-        public void Update(TEntity entity)
+        public virtual void Update(TEntity entity)
         {
             EntityDbSet.Update(entity);
         }
 
-        public Task UpdateAsync(TEntity entity)
-
+        public virtual Task UpdateAsync(TEntity entity)
         {
             Update(entity);
             return Task.CompletedTask;
@@ -49,29 +48,29 @@ namespace WebApiBaseLibrary.DataAccess.Repositories
         public virtual async Task<TEntity> GetAsync(Guid id)
             => await EntityDbSet.FindAsync(id);
 
-        public void Delete(Guid id)
+        public virtual void Delete(Guid id)
         {
             var entity = Get(id);
 
             EntityDbSet.Remove(entity);
         }
 
-        public async Task DeleteAsync(Guid id)
+        public virtual async Task DeleteAsync(Guid id)
         {
             var entity = await GetAsync(id);
 
             EntityDbSet.Remove(entity);
         }
 
-        public bool ExistsWithId(Guid id) => EntityDbSet.Any(entity => entity.Id == id);
+        public virtual bool ExistsWithId(Guid id) => EntityDbSet.Any(entity => entity.Id == id);
 
-        public Task<bool> ExistsWithIdAsync(Guid id) => EntityDbSet.AnyAsync(entity => entity.Id == id);
+        public virtual Task<bool> ExistsWithIdAsync(Guid id) => EntityDbSet.AnyAsync(entity => entity.Id == id);
 
-        public void SaveChanges()
+        public virtual void SaveChanges()
         {
             EntityContext.SaveChanges();
         }
 
-        public Task SaveChangesAsync() => EntityContext.SaveChangesAsync();
+        public virtual Task SaveChangesAsync() => EntityContext.SaveChangesAsync();
     }
 }
