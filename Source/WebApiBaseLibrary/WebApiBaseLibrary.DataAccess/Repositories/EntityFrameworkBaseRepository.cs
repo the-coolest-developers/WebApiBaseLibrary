@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -72,5 +73,15 @@ namespace WebApiBaseLibrary.DataAccess.Repositories
         }
 
         public virtual Task SaveChangesAsync() => EntityContext.SaveChangesAsync();
+
+        public IEnumerable<TEntity> GetModifiedEntities()
+        {
+            var modifiedEntities = EntityContext.ChangeTracker.Entries()
+                .Where(entry => entry.Entity is TEntity)
+                .Where(entry => entry.State == EntityState.Modified)
+                .Select(entry => entry.Entity as TEntity);
+
+            return modifiedEntities;
+        }
     }
 }
