@@ -3,7 +3,7 @@
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
         <IsPackable>true</IsPackable>
-        <VersionPrefix>1.0.9</VersionPrefix>
+        <VersionPrefix>1.1.0</VersionPrefix>
         <VersionSuffix>develop</VersionSuffix>
     </PropertyGroup>
 
