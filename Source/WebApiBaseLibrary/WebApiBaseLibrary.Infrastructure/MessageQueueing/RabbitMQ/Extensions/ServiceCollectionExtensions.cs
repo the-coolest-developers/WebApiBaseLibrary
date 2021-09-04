@@ -6,7 +6,7 @@ using WebApiBaseLibrary.Infrastructure.Configuration;
 using WebApiBaseLibrary.Infrastructure.Constants;
 using WebApiBaseLibrary.Infrastructure.Extensions;
 
-namespace WebApiBaseLibrary.Infrastructure.MessageQueueing.RabbitMQ
+namespace WebApiBaseLibrary.Infrastructure.MessageQueueing.RabbitMQ.Extensions
 {
     public static class ServiceCollectionExtensions
     {
