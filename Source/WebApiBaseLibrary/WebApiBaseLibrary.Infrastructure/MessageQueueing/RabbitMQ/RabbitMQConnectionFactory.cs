@@ -16,7 +16,7 @@ namespace WebApiBaseLibrary.Infrastructure.MessageQueueing.RabbitMQ
             };
         }
 
-        public IMessageQueueConnection GetConnection()
+        public IMessageQueueConnection CreateConnection()
         {
             var connection = _connectionFactory.CreateConnection();
 
