@@ -14,7 +14,7 @@ namespace WebApiBaseLibrary.Infrastructure.MessageQueueing.RabbitMQ.Extensions
         public static IServiceCollection AddRabbitMQ(
             this IServiceCollection services,
             IConfiguration configuration,
-            IServiceProvider serviceProvider)
+            Func<IServiceProvider> serviceProviderFunc)
         {
             services.AddSingletonConfiguration<RabbitMQConfiguration>(
                 configuration,
@@ -22,7 +22,7 @@ namespace WebApiBaseLibrary.Infrastructure.MessageQueueing.RabbitMQ.Extensions
 
             services.AddSingleton<IMessageQueueConnectionFactory, RabbitMQConnectionFactory>(_ =>
             {
-                var rabbitmqConfiguration = serviceProvider.GetService<RabbitMQConfiguration>();
+                var rabbitmqConfiguration = serviceProviderFunc().GetService<RabbitMQConfiguration>();
 
                 var connectionFactory = new RabbitMQConnectionFactory(rabbitmqConfiguration?.HostName);
 
@@ -30,8 +30,8 @@ namespace WebApiBaseLibrary.Infrastructure.MessageQueueing.RabbitMQ.Extensions
             });
             services.AddScoped<IMessageQueueConnection, RabbitMQConnection>(_ =>
             {
-                var connectionFactory = serviceProvider.GetService<IMessageQueueConnectionFactory>();
-                var connection = connectionFactory?.GetConnection();
+                var connectionFactory = serviceProviderFunc().GetService<IMessageQueueConnectionFactory>();
+                var connection = connectionFactory?.CreateConnection();
 
                 return (RabbitMQConnection) connection;
             });

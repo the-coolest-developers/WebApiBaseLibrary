@@ -2,6 +2,6 @@
 {
     public interface IMessageQueueConnectionFactory
     {
-        public IMessageQueueConnection GetConnection();
+        public IMessageQueueConnection CreateConnection();
     }
 }

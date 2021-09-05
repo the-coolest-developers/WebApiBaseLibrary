@@ -5,7 +5,7 @@ using RabbitMQ.Client;
 namespace WebApiBaseLibrary.Infrastructure.MessageQueueing.RabbitMQ
 {
     [SuppressMessage("ReSharper", "InconsistentNaming")]
-    public class RabbitMQConnection : IMessageQueueConnection, IDisposable
+    public class RabbitMQConnection : IMessageQueueConnection
     {
         private readonly IConnection _connection;
 
@@ -25,6 +25,14 @@ namespace WebApiBaseLibrary.Infrastructure.MessageQueueing.RabbitMQ
             var publisher = new RabbitMQPublisher(channel, queueName);
 
             return publisher;
+        }
+
+        public IMessageQueueReader CreateReader(string queueName)
+        {
+            var channel = _connection.CreateModel();
+            var reader = new RabbitMqReader(channel, queueName);
+
+            return reader;
         }
     }
 }
