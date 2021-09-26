@@ -13,17 +13,22 @@ namespace WebApiBaseLibrary.Infrastructure.MessageQueueing.RabbitMQ.Extensions
         [SuppressMessage("ReSharper", "InconsistentNaming")]
         public static IServiceCollection AddRabbitMQ(
             this IServiceCollection services,
-            IConfiguration configuration)
+            IConfiguration configuration,
+            Func<IServiceProvider> serviceProviderFunc)
         {
+            var rabbitMQConfiguration = configuration
+                .GetSection(InfrastructureAppSettings.RabbitMQConfiguration)
+                .Get<RabbitMQConfiguration>();
+
             services.AddSingleton<IMessageQueueConnectionFactory, RabbitMQConnectionFactory>(_ =>
             {
-                var connectionFactory = new RabbitMQConnectionFactory(rabbitMqConfiguration?.HostName);
+                var connectionFactory = new RabbitMQConnectionFactory(rabbitMQConfiguration?.HostName);
 
                 return connectionFactory;
             });
             services.AddScoped<IMessageQueueConnection, RabbitMQConnection>(_ =>
             {
-                var connectionFactory = getServiceProvider().GetService<IMessageQueueConnectionFactory>();
+                var connectionFactory = serviceProviderFunc().GetService<IMessageQueueConnectionFactory>();
                 var connection = connectionFactory?.CreateConnection();
 
                 return (RabbitMQConnection) connection;
