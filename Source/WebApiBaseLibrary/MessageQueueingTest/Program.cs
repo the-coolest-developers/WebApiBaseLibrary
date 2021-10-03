@@ -1,4 +1,5 @@
 ﻿using System;
+using WebApiBaseLibrary.Infrastructure.Configuration;
 using WebApiBaseLibrary.Infrastructure.MessageQueueing;
 using WebApiBaseLibrary.Infrastructure.MessageQueueing.RabbitMQ;
 
@@ -8,7 +9,15 @@ namespace MessageQueueingTest
     {
         static void Main(string[] args)
         {
-            IMessageQueueConnectionFactory factory = new RabbitMQConnectionFactory("localhost");
+            var rabbitMqConfiguration = new RabbitMQConfiguration()
+            {
+                HostName = "3.69.44.62",
+                Port = 5672,
+                VirtualHost = "/tcd",
+                UserName = "tcd_sso",
+                Password = "tcd_sso_password"
+            };
+            IMessageQueueConnectionFactory factory = new RabbitMQConnectionFactory(rabbitMqConfiguration);
             var connection = factory.CreateConnection();
 
             IMessageQueueReader leaveGameReader = connection.CreateReader("LeaveGameQueue");
