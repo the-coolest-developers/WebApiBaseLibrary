@@ -29,7 +29,7 @@ namespace WebApiBaseLibrary.Infrastructure.MessageQueueing.RabbitMQ
                 arguments: null);
         }
 
-        public void SetReceivedAction(Action<string> receivedMessageAction)
+        public void SetReceiveAction(Action<string> receivedMessageAction)
         {
             var consumer = new EventingBasicConsumer(_channel);
             consumer.Received += (sender, eventArgs) =>

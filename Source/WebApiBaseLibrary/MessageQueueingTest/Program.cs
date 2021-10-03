@@ -21,11 +21,11 @@ namespace MessageQueueingTest
             var connection = factory.CreateConnection();
 
             IMessageQueueReader leaveGameReader = connection.CreateReader("LeaveGameQueue");
-            leaveGameReader.SetReceivedAction(PlayerLeft);
+            leaveGameReader.SetReceiveAction(PlayerLeft);
             leaveGameReader.StartReading();
 
             IMessageQueueReader joinGameReader = connection.CreateReader("JoinGameQueue");
-            joinGameReader.SetReceivedAction(PlayerJoined);
+            joinGameReader.SetReceiveAction(PlayerJoined);
             joinGameReader.StartReading();
 
             Console.WriteLine(" Press [enter] to exit.");
