@@ -20,7 +20,7 @@ namespace WebApiBaseLibrary.Infrastructure.Extensions.RabbitMQ
                 .Get<RabbitMQConfiguration>();
 
             var connectionFactory = new RabbitMQConnectionFactory(rabbitMQConfiguration?.HostName);
-            var connection = connectionFactory?.CreateConnection();
+            var connection = connectionFactory.CreateConnection();
                 
             services.AddSingleton<IMessageQueueConnectionFactory, RabbitMQConnectionFactory>(_ => connectionFactory);
             services.AddSingleton<IMessageQueueConnection, RabbitMQConnection>(_ => (RabbitMQConnection) connection);
