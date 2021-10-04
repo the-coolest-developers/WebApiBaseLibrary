@@ -3,7 +3,7 @@ using System.Text;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
 
-namespace WebApiBaseLibrary.Infrastructure.MessageQueueing.RabbitMQ
+namespace WebApiBaseLibrary.MessageQueueing.MessageQueueing.RabbitMQ
 {
     [SuppressMessage("ReSharper", "InconsistentNaming")]
     public class RabbitMQPublisher : IMessageQueuePublisher

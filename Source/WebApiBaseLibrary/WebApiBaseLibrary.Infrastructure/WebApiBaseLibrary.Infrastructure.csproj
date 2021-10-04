@@ -3,17 +3,12 @@
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
         <IsPackable>true</IsPackable>
-        <VersionPrefix>1.1.5</VersionPrefix>
+        <VersionPrefix>1.1.6</VersionPrefix>
         <VersionSuffix>develop</VersionSuffix>
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\WebApiBaseLibrary.Authorization\WebApiBaseLibrary.Authorization.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-      <PackageReference Include="RabbitMQ.Client" Version="6.2.2" />
+        <ProjectReference Include="..\WebApiBaseLibrary.Authorization\WebApiBaseLibrary.Authorization.csproj"/>
     </ItemGroup>
 
 </Project>

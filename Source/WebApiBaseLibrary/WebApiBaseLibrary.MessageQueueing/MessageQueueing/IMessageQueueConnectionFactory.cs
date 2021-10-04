@@ -1,4 +1,4 @@
-﻿namespace WebApiBaseLibrary.Infrastructure.MessageQueueing
+﻿namespace WebApiBaseLibrary.MessageQueueing.MessageQueueing
 {
     public interface IMessageQueueConnectionFactory
     {

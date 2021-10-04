@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 
-namespace WebApiBaseLibrary.Infrastructure.Configuration
+namespace WebApiBaseLibrary.MessageQueueing.Configuration
 {
     [SuppressMessage("ReSharper", "InconsistentNaming")]
     public class RabbitMQConfiguration

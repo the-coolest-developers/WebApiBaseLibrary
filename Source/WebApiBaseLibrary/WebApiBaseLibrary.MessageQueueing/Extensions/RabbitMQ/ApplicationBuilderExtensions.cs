@@ -2,13 +2,13 @@
 using System.Linq;
 using System.Reflection;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
-using WebApiBaseLibrary.Infrastructure.Attributes;
-using WebApiBaseLibrary.Infrastructure.MessageQueueing;
 using WebApiBaseLibrary.Infrastructure.Reflection;
+using WebApiBaseLibrary.MessageQueueing.Attributes;
+using WebApiBaseLibrary.MessageQueueing.MessageQueueing;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace WebApiBaseLibrary.Infrastructure.Extensions.RabbitMQ
+namespace WebApiBaseLibrary.MessageQueueing.Extensions.RabbitMQ
 {
     public static class ApplicationBuilderExtensions
     {

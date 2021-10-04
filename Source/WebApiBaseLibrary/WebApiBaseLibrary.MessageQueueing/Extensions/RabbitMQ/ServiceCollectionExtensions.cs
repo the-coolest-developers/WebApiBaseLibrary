@@ -1,16 +1,14 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using WebApiBaseLibrary.Infrastructure.Attributes;
-using WebApiBaseLibrary.Infrastructure.Configuration;
-using WebApiBaseLibrary.Infrastructure.Constants;
-using WebApiBaseLibrary.Infrastructure.MessageQueueing;
-using WebApiBaseLibrary.Infrastructure.MessageQueueing.RabbitMQ;
 using WebApiBaseLibrary.Infrastructure.Reflection;
+using WebApiBaseLibrary.MessageQueueing.Attributes;
+using WebApiBaseLibrary.MessageQueueing.Configuration;
+using WebApiBaseLibrary.MessageQueueing.MessageQueueing;
+using WebApiBaseLibrary.MessageQueueing.MessageQueueing.RabbitMQ;
 
-namespace WebApiBaseLibrary.Infrastructure.Extensions.RabbitMQ
+namespace WebApiBaseLibrary.MessageQueueing.Extensions.RabbitMQ
 {
     public static class ServiceCollectionExtensions
     {

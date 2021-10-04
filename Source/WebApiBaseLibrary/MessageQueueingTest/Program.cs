@@ -1,7 +1,8 @@
 ﻿using System;
 using WebApiBaseLibrary.Infrastructure.Configuration;
-using WebApiBaseLibrary.Infrastructure.MessageQueueing;
-using WebApiBaseLibrary.Infrastructure.MessageQueueing.RabbitMQ;
+using WebApiBaseLibrary.MessageQueueing.Configuration;
+using WebApiBaseLibrary.MessageQueueing.MessageQueueing;
+using WebApiBaseLibrary.MessageQueueing.MessageQueueing.RabbitMQ;
 
 namespace MessageQueueingTest
 {
