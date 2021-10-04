@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace WebApiBaseLibrary.Infrastructure.MessageQueueing
+namespace WebApiBaseLibrary.MessageQueueing.MessageQueueing
 {
     public interface IMessageQueuePublisher : IDisposable
     {

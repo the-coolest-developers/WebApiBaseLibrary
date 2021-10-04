@@ -1,8 +1,8 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using RabbitMQ.Client;
-using WebApiBaseLibrary.Infrastructure.Configuration;
+using WebApiBaseLibrary.MessageQueueing.Configuration;
 
-namespace WebApiBaseLibrary.Infrastructure.MessageQueueing.RabbitMQ
+namespace WebApiBaseLibrary.MessageQueueing.MessageQueueing.RabbitMQ
 {
     [SuppressMessage("ReSharper", "InconsistentNaming")]
     public class RabbitMQConnectionFactory : IMessageQueueConnectionFactory

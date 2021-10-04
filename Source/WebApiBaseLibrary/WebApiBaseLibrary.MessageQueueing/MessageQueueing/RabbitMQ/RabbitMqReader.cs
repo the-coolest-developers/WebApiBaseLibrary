@@ -4,7 +4,7 @@ using System.Text;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 
-namespace WebApiBaseLibrary.Infrastructure.MessageQueueing.RabbitMQ
+namespace WebApiBaseLibrary.MessageQueueing.MessageQueueing.RabbitMQ
 {
     [SuppressMessage("ReSharper", "InconsistentNaming")]
     public class RabbitMqReader : IMessageQueueReader

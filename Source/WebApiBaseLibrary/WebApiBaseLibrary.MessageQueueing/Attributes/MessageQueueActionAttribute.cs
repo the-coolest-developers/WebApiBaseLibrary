@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace WebApiBaseLibrary.Infrastructure.Attributes
+namespace WebApiBaseLibrary.MessageQueueing.Attributes
 {
     [AttributeUsage(AttributeTargets.Method)]
     public class MessageQueueActionAttribute : Attribute
