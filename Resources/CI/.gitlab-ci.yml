@@ -14,7 +14,7 @@
 
 .dev_changes: &dev_changes
   changes:
-    - "Source/"
+    - Source/*
 
 .protected_branch_rules:
   rules:
