@@ -1,1 +1,10 @@
-* @ArtiomCiobanu @Cute-Monster 
+[App Code]
+Source/ @ArtiomCiobanu @Cute-Monster
+
+[CI/CD]
+Resources/CI/ @Cute-Monster
+CODEOWNERS @Cute-Monster
+
+[All other stuff]
+.gitignore @ArtiomCiobanu @Cute-Monster
+README.md @artiomCiobanu @Cute-Monster
