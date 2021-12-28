@@ -1,18 +1,24 @@
 include:
   - project: "the-coolest-developers/devops/shared-pilelines"
-    ref: v1.0.0 
+    ref: develop
     file: "shared.yml"
 
 variables:
   SOLUTION_PATH: "${CI_PROJECT_DIR}/Source/${PROJECT_NAME}/${PROJECT_NAME}.sln"
 
 stages:
-  - build_code_base
+  - build_scan_base
   - pack_nugets
 
 build_source_code:
-  stage: build_code_base
+  stage: build_scan_base
   extends: .build
+
+#sonar_scan_code:
+#  stage: build_scan_base
+#  needs:
+#    - build_source_code
+#  extends: .sonarcloud_check
 
 pack_code:
   stage: pack_nugets
