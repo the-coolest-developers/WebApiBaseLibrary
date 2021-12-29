@@ -14,12 +14,6 @@ build_source_code:
   stage: build_scan_base
   extends: .build
 
-#sonar_scan_code:
-#  stage: build_scan_base
-#  needs:
-#    - build_source_code
-#  extends: .sonarcloud_check
-
 pack_code:
   stage: pack_nugets
   extends: .pack
