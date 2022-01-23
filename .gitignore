@@ -76,5 +76,6 @@ fabric.properties
 **/.idea
 **/obj
 **/bin
+**/.vs
 
 *.sln.DotSettings.user

@@ -19,7 +19,7 @@ namespace WebApiBaseLibrary.Authorization.Configurators
             ValidIssuer = Configuration.Issuer,
             ValidateAudience = true,
             ValidAudience = Configuration.Audience,
-            ValidateLifetime = true,
+            ValidateLifetime = false,
             RequireExpirationTime = true,
             IssuerSigningKey = GetSymmetricSecurityKey(),
             ValidateIssuerSigningKey = true
