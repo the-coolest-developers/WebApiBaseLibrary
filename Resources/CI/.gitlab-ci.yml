@@ -8,6 +8,7 @@ variables:
 
 stages:
   - build_scan_base
+  - code_scan
   - pack_nugets
 
 build_source_code:
